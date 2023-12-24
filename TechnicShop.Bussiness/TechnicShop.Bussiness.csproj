@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concrete\" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\TechnicShop.DataAccess\TechnicShop.DataAccess.csproj" />
+    <ProjectReference Include="..\TechnicShop.Model\TechnicShop.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validasyon\" />
   </ItemGroup>
 
 </Project>
