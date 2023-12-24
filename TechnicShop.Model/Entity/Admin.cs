@@ -10,7 +10,6 @@ namespace TechnicShop.Model.Entity
         {
             AdminRoles = new HashSet<AdminRole>();
         }
-        public int Ozgur { get; set; }
         public string? Name { get; set; }
         public string? LastName { get; set; }
         public string? AdminName { get; set; }

@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="CrossCuttingConcern\Crypto\" />
     <Folder Include="CrossCuttingConcern\MailOp\" />
-    <Folder Include="Data\Concrete\" />
   </ItemGroup>
 
 </Project>
