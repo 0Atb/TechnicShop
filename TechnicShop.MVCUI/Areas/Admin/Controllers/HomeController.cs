@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TechnicShop.Model.ViewModels.Areas.Admin;
 
 namespace TechnicShop.MVCUI.Areas.Admin.Controllers
 {
@@ -7,6 +8,7 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
+
             return View();
         }
     }

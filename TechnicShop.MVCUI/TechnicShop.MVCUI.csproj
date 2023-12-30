@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
+    <ProjectReference Include="..\TechnicShop.Bussiness\TechnicShop.Bussiness.csproj" />
+    <ProjectReference Include="..\TechnicShop.Model\TechnicShop.Model.csproj" />
   </ItemGroup>
 
 </Project>

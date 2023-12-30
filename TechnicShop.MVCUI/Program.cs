@@ -1,3 +1,8 @@
+using TechnicShop.Bussiness.Abstract;
+using TechnicShop.Bussiness.Concrete;
+using TechnicShop.DataAccess.Abstract;
+using TechnicShop.DataAccess.Concrete.Repository;
+
 namespace TechnicShop.MVCUI
 {
     public class Program
@@ -8,6 +13,9 @@ namespace TechnicShop.MVCUI
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddSingleton<IAdminBs, AdminBs>();
+            builder.Services.AddSingleton<IAdminRepository, EfAdminRepository>();
 
             var app = builder.Build();
 
@@ -30,13 +38,13 @@ namespace TechnicShop.MVCUI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}"
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
 
                 endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
             });
 

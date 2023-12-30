@@ -140,7 +140,7 @@ namespace TechnicShop.Model.Entity
             {
                 entity.ToTable("City");
 
-                entity.Property(e => e.CityName).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -196,7 +196,7 @@ namespace TechnicShop.Model.Entity
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.GenderName).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
@@ -207,7 +207,7 @@ namespace TechnicShop.Model.Entity
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.HeaderName).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
@@ -218,7 +218,7 @@ namespace TechnicShop.Model.Entity
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.MartialStatusName).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
@@ -383,11 +383,11 @@ namespace TechnicShop.Model.Entity
             {
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.SocialMediaIcon).HasMaxLength(250);
+                entity.Property(e => e.Icon).HasMaxLength(250);
 
-                entity.Property(e => e.SocialMediaName).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(50);
 
-                entity.Property(e => e.SocialMediaPath).HasMaxLength(50);
+                entity.Property(e => e.Path).HasMaxLength(50);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
