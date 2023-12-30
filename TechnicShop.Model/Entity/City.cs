@@ -12,7 +12,7 @@ namespace TechnicShop.Model.Entity
             Users = new HashSet<User>();
         }
 
-        public string? CityName { get; set; }
+        public string? Name { get; set; }
         public string? PlateCode { get; set; }
 
         public virtual ICollection<Admin> Admins { get; set; }

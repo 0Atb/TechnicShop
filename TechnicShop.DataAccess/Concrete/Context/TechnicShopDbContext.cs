@@ -33,7 +33,7 @@ namespace TechnicShop.Model.Entity
         public virtual DbSet<ProductImage> ProductImages { get; set; } = null!;
         public virtual DbSet<ProductPrice> ProductPrices { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
-        public virtual DbSet<SocialMedium> SocialMedia { get; set; } = null!;
+        public virtual DbSet<SocialMedia> SocialMedias { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserRole> UserRoles { get; set; } = null!;
 
@@ -379,7 +379,7 @@ namespace TechnicShop.Model.Entity
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<SocialMedium>(entity =>
+            modelBuilder.Entity<SocialMedia>(entity =>
             {
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 

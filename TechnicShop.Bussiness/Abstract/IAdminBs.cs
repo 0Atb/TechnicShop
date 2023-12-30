@@ -7,7 +7,7 @@ using TechnicShop.Model.Entity;
 
 namespace TechnicShop.Bussiness.Abstract
 {
-    public interface IAdminBs:IBussinessBase<Admin>
+    public interface IAdminBs : IBussinessBase<Admin>
     {
     }
 }
