@@ -2,17 +2,20 @@
 using TechnicShop.Bussiness.Abstract;
 using TechnicShop.Bussiness.Concrete;
 using TechnicShop.Model.ViewModels.Areas.Admin;
+using TechnicShop.MVCUI.Areas.Admin.Filters;
 
 namespace TechnicShop.MVCUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class AdminController : Controller
     {
-        IAdminBs _adminBs;
+        private readonly IAdminBs _adminBs;
+        private readonly ISessionManager sessionManager;
 
-        public AdminController(IAdminBs adminBs)
+        public AdminController(IAdminBs adminBs, ISessionManager _sessionManager)
         {
             _adminBs = adminBs;
+            sessionManager = _sessionManager;
         }
         public IActionResult LogIn2()
         {
@@ -36,6 +39,12 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
 
             if (adminUser != null)
             {
+                //HttpContext.Session["aktifkullanici"] = 123;
+
+
+
+
+
                 //return RedirectToAction("Index", "Home");
                 return Redirect("/Admin/Home/Index");
             }
@@ -65,16 +74,25 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
                 return Json(new { result = false, Mesaj = "Validasyon Hatası Oldu." });
             }
 
-            Model.Entity.Admin admin = _adminBs.Get(x => x.Email == model.Email && x.Password == model.Password && x.IsDeleted == false);
+            Model.Entity.Admin admin = _adminBs.Get(x => x.Email == model.Email && x.Password == model.Password && x.IsDeleted == false, "AdminRoles", "AdminRoles.Role");
 
             if (admin != null)
             {
+
+                sessionManager.AktifKullanici = admin;
+
                 return Json(new { result = true, Mesaj = "Giriş Başarılı"});
             }
             else
             {
                 return Json(new { result = false, Mesaj = "Giriş Başarısız" });
             }
+        }
+
+
+        public IActionResult NonAuthorization()
+        { 
+            return View();
         }
     }
 }

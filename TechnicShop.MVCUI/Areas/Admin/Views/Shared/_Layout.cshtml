@@ -15,6 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="~/admin/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/admin/dist/css/adminlte.min.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     @RenderSection("style",false)
 </head>
 <body class="hold-transition sidebar-mini">
@@ -25,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             @await Component.InvokeAsync("Content")
             @RenderBody()
         </div>
-        
+
         @{
             await Html.RenderPartialAsync("~/Areas/Admin/Views/Shared/Partials/_footer.cshtml");
         }

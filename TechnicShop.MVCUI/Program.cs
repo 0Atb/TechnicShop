@@ -1,11 +1,13 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Newtonsoft.Json;
 using TechnicShop.Bussiness.Abstract;
 using TechnicShop.Bussiness.Concrete;
 using TechnicShop.Bussiness.Validasyon.Areas.Admin;
 using TechnicShop.DataAccess.Abstract;
 using TechnicShop.DataAccess.Concrete.Repository;
 using TechnicShop.Model.ViewModels.Areas.Admin;
+using TechnicShop.MVCUI.Areas.Admin.Filters;
 
 namespace TechnicShop.MVCUI
 {
@@ -16,7 +18,10 @@ namespace TechnicShop.MVCUI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddNewtonsoftJson(options=>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             //builder.Services.AddTransient(); Istediðiniz kadar newliyor her tablepte new iþlemini tekrar yapar.
             //builder.Services.AddSingleton(); sadece 1 kere kullanýlýyor talep edildiðinde bunu tekrar kullanýyor.
@@ -29,13 +34,19 @@ namespace TechnicShop.MVCUI
             builder.Services.AddSingleton<IAdminBs, AdminBs>();
             builder.Services.AddSingleton<IAdminRepository, EfAdminRepository>();
 
-
+            //Session
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
+                //5 dakika hiç bir iþlem yapmadan beklersen seni sistem otomatik olarak dýþarý atar session sýfýrlanýr veya baþka bir deðiþle null olur.
+            });
 
 
 
             //Validasyon
             builder.Services.AddSingleton<IValidator<LogInViewModel>, LogInVmValidator>();
-
+            builder.Services.AddSingleton<ISessionManager,SessionManager>();
+            builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
 
 
 
@@ -51,6 +62,9 @@ namespace TechnicShop.MVCUI
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
