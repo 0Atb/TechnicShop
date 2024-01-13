@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\TechnicShop.DataAccess\TechnicShop.DataAccess.csproj" />
-    <ProjectReference Include="..\TechnicShop.Model\TechnicShop.Model.csproj" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Validasyon\" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\TechnicShop.DataAccess\TechnicShop.DataAccess.csproj" />
+    <ProjectReference Include="..\TechnicShop.Model\TechnicShop.Model.csproj" />
   </ItemGroup>
 
 </Project>

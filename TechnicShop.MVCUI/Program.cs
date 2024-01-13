@@ -1,7 +1,11 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using TechnicShop.Bussiness.Abstract;
 using TechnicShop.Bussiness.Concrete;
+using TechnicShop.Bussiness.Validasyon.Areas.Admin;
 using TechnicShop.DataAccess.Abstract;
 using TechnicShop.DataAccess.Concrete.Repository;
+using TechnicShop.Model.ViewModels.Areas.Admin;
 
 namespace TechnicShop.MVCUI
 {
@@ -14,8 +18,26 @@ namespace TechnicShop.MVCUI
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            //builder.Services.AddTransient(); Istediðiniz kadar newliyor her tablepte new iþlemini tekrar yapar.
+            //builder.Services.AddSingleton(); sadece 1 kere kullanýlýyor talep edildiðinde bunu tekrar kullanýyor.
+            //builder.Services.AddScoped();    sadece 1 kere geçerli oluyor sonra scope bitince ölüyor.
+
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddFluentValidationClientsideAdapters();
+
+
             builder.Services.AddSingleton<IAdminBs, AdminBs>();
             builder.Services.AddSingleton<IAdminRepository, EfAdminRepository>();
+
+
+
+
+
+            //Validasyon
+            builder.Services.AddSingleton<IValidator<LogInViewModel>, LogInVmValidator>();
+
+
+
 
             var app = builder.Build();
 
