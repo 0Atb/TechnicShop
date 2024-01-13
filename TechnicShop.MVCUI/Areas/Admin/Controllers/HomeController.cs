@@ -5,8 +5,8 @@ using TechnicShop.MVCUI.Areas.Admin.Filters;
 namespace TechnicShop.MVCUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[AktifKullaniciFilter]
-    [RolFilter("Admin")]
+    [AktifKullaniciFilter]
+    [RolFilter("Admin", "Muhasebe")]
     public class HomeController : Controller
     {
         

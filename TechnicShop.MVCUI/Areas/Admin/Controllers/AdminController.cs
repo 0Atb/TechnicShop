@@ -3,6 +3,7 @@ using TechnicShop.Bussiness.Abstract;
 using TechnicShop.Bussiness.Concrete;
 using TechnicShop.Model.ViewModels.Areas.Admin;
 using TechnicShop.MVCUI.Areas.Admin.Filters;
+using TechnicShop.MVCUI.Extensions;
 
 namespace TechnicShop.MVCUI.Areas.Admin.Controllers
 {
@@ -41,8 +42,7 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
             {
                 //HttpContext.Session["aktifkullanici"] = 123;
 
-
-
+                
 
 
                 //return RedirectToAction("Index", "Home");
@@ -94,5 +94,13 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
         { 
             return View();
         }
+
+        public IActionResult LogOut()
+        {
+            sessionManager.AktifKullanici = null;
+
+            return RedirectToAction("LogIn","Admin");
+        }
+
     }
 }
