@@ -1,1 +1,1 @@
-https://dosya.co/pwxuo3gzhtqs/TechnicShopDb.rar.html
+https://dosya.co/xklttc4gnj98/TechnicShop_v.0.1.sql.html
