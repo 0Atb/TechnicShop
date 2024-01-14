@@ -102,5 +102,55 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
             return RedirectToAction("LogIn","Admin");
         }
 
+
+        public IActionResult ForgotPassword()
+        {
+            
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult ForgotPassword(ForgotPasswordViewModel forgotPasswordViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Mesaj = "İşlemler Hatalı";
+                return Json(new { result = false, Mesaj= "Validasyon Hatası Oldu." });
+            }
+
+            Model.Entity.Admin admin = null;
+
+            if (forgotPasswordViewModel.EmailOrPhoneNumber.Contains("@"))
+            {
+                admin = _adminBs.Get(x => x.Email == forgotPasswordViewModel.EmailOrPhoneNumber);
+            }
+            else
+            {
+                admin = _adminBs.Get(x => x.PhoneNumber == forgotPasswordViewModel.EmailOrPhoneNumber);
+            }
+
+
+            
+
+            if (admin != null)
+            {
+
+
+
+
+                return Json(new { result = true, Mesaj = "Şifre Değiştirme Linki Mail Adresinize Gönderildi. Lütfen Mailinizi Kontrol Ediniz." });
+            }
+            else
+            {
+                return Json(new { result = false, Mesaj = "Lütfen Bilgilerinizi Kontrol Ediniz." });
+            }
+
+
+
+            
+        }
+
     }
 }

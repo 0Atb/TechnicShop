@@ -46,7 +46,7 @@ namespace TechnicShop.MVCUI
 
             //Validasyon
             builder.Services.AddSingleton<IValidator<LogInViewModel>, LogInVmValidator>();
-           
+            builder.Services.AddSingleton<IValidator<ForgotPasswordViewModel>, ForgotPasswordVmValidator>();
 
 
 
