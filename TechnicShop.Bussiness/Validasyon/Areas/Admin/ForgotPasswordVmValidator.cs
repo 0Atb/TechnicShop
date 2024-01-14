@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using TechnicShop.Model.ViewModels.Areas.Admin;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TechnicShop.Bussiness.Validasyon.Areas.Admin
 {
@@ -14,7 +15,7 @@ namespace TechnicShop.Bussiness.Validasyon.Areas.Admin
             When(p => !p.EmailOrPhoneNumber.Contains("@"), () =>
             {
                 RuleFor(p => p.EmailOrPhoneNumber).NotNull().WithMessage("Lütfen Geçerli Bir Telefon Numarası Giriniz");
-            });
+            }); 
         }
     }
 }
