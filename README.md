@@ -1,1 +1,1 @@
-https://dosya.co/xklttc4gnj98/TechnicShop_v.0.1.sql.html
+2024 01 21 => https://dosya.co/iuhys94mfbju/TechnicShopDB.sql.html 
