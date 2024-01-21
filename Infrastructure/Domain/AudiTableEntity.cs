@@ -15,5 +15,14 @@ namespace Infrastructure.Domain
         public int? LastProcessUser { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public bool? IsDeleted { get; set; }
+
+
+
+
+        //public Nullable<int> CreatedBy { get; set; }
+        //public Nullable<DateTime> CreatedDate { get; set; }
+        //public Nullable<int> LastProcessUser { get; set; }
+        //public Nullable<DateTime> UpdatedDate { get; set; }
+        //public Nullable<bool> IsDeleted { get; set; }
     }
 }

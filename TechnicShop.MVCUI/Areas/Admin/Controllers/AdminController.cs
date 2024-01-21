@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.CrossCuttingConcern.MailOp;
+using Microsoft.AspNetCore.Mvc;
 using TechnicShop.Bussiness.Abstract;
 using TechnicShop.Bussiness.Concrete;
+using TechnicShop.Model.Static;
 using TechnicShop.Model.ViewModels.Areas.Admin;
 using TechnicShop.MVCUI.Areas.Admin.Filters;
 using TechnicShop.MVCUI.Extensions;
@@ -42,8 +44,6 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
             {
                 //HttpContext.Session["aktifkullanici"] = 123;
 
-                
-
 
                 //return RedirectToAction("Index", "Home");
                 return Redirect("/Admin/Home/Index");
@@ -81,7 +81,7 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
 
                 sessionManager.AktifKullanici = admin;
 
-                return Json(new { result = true, Mesaj = "Giriş Başarılı"});
+                return Json(new { result = true, Mesaj = "Giriş Başarılı" });
             }
             else
             {
@@ -91,7 +91,7 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
 
 
         public IActionResult NonAuthorization()
-        { 
+        {
             return View();
         }
 
@@ -99,13 +99,13 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
         {
             sessionManager.AktifKullanici = null;
 
-            return RedirectToAction("LogIn","Admin");
+            return RedirectToAction("LogIn", "Admin");
         }
 
-
+        [HttpGet]
         public IActionResult ForgotPassword()
         {
-            
+
 
             return View();
         }
@@ -117,7 +117,7 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Mesaj = "İşlemler Hatalı";
-                return Json(new { result = false, Mesaj= "Validasyon Hatası Oldu." });
+                return Json(new { result = false, Mesaj = "Validasyon Hatası Oldu." });
             }
 
             Model.Entity.Admin admin = null;
@@ -131,13 +131,9 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
                 admin = _adminBs.Get(x => x.PhoneNumber == forgotPasswordViewModel.EmailOrPhoneNumber);
             }
 
-
-            
-
             if (admin != null)
             {
-
-
+                MailManager.Send(admin.Email, "Şifre Değiştirme", "Merhaba Sayin : " + admin.Name + " " + admin.LastName + "</br> Şifrenizi Değiştirmek İçim Lütfen <a href='" + Keys.SITEADDRESS + "Admin/Admin/UpdatePassword?UniqueId=" + admin.UniqueId + "'>Tıklayınız</a> ");
 
 
                 return Json(new { result = true, Mesaj = "Şifre Değiştirme Linki Mail Adresinize Gönderildi. Lütfen Mailinizi Kontrol Ediniz." });
@@ -146,10 +142,57 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
             {
                 return Json(new { result = false, Mesaj = "Lütfen Bilgilerinizi Kontrol Ediniz." });
             }
+        }
+
+        public IActionResult UpdatePassword(string UniqueId)
+        {
+            UpdatePasswordViewModel model = new UpdatePasswordViewModel();
+
+            model.UniqueId = UniqueId;
+
+            Model.Entity.Admin admin = _adminBs.Get(x => x.UniqueId.ToString() == model.UniqueId);
+
+            if (admin == null)
+            {
+                return RedirectToAction("DangerZone", "Admin");
+            }
+
+            return View(model);
+        }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult UpdatePassword(UpdatePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Mesaj = "İşlemler Hatalı";
+                return Json(new { result = false, Mesaj = "Validasyon Hatası" });
+            }
 
-            
+
+            Model.Entity.Admin admin = _adminBs.Get(x => x.UniqueId.ToString() == model.UniqueId);
+
+            if (admin != null && model.Password == model.ConfirmPassword)
+            {
+                admin.UniqueId = Guid.NewGuid(); //sql de newid() ile aynı quid id yi üretir.
+                admin.Password = model.Password;
+
+                _adminBs.Update(admin);
+
+                return Json(new { result = true, Mesaj = "Şifreniz Başarıyla Değişti. Giriş Yapabilirsiniz." });
+            }
+            else
+            {
+                return Json(new { result = false, Mesaj = "Ip Adresiniz Kayıt Ediliyor. Lütfen Yetksiz İşlem Yapmayınız." });
+            }
+        }
+
+
+        public IActionResult DangerZone()
+        {
+            return View();
         }
 
     }

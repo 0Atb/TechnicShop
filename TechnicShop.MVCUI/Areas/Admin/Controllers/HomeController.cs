@@ -9,7 +9,6 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
     [RolFilter("Admin", "Muhasebe")]
     public class HomeController : Controller
     {
-        
         public IActionResult Index()
         {
 
