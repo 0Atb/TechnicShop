@@ -47,7 +47,8 @@ namespace Infrastructure.Data.Concrete.EntityFramework
                         query = query.Include(item);
                     }
                 }
-                return query.SingleOrDefault(filter);
+                //return query.SingleOrDefault(filter);
+                return filter == null ? query.ToList().FirstOrDefault() : query.SingleOrDefault(filter);
             }
         }
 

@@ -67,6 +67,8 @@ namespace TechnicShop.Model.Entity
 
                 entity.Property(e => e.PhoneNumber).HasMaxLength(50);
 
+                entity.Property(e => e.Address).HasMaxLength(150);
+
                 entity.Property(e => e.UniqueId).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");

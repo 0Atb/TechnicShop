@@ -37,7 +37,7 @@ namespace TechnicShop.MVCUI
             //Session
             builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(1);
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
                 //5 dakika hiç bir iþlem yapmadan beklersen seni sistem otomatik olarak dýþarý atar session sýfýrlanýr veya baþka bir deðiþle null olur.
             });
             builder.Services.AddSingleton<ISessionManager, SessionManager>();

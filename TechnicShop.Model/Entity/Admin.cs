@@ -22,7 +22,8 @@ namespace TechnicShop.Model.Entity
         public string? PhoneNumber { get; set; }
         public int? MaritalStatusId { get; set; }
         public int? CountryId { get; set; }
-      
+        public string? Address { get; set; }
+
 
         public virtual City? City { get; set; }
         public virtual Gender? Gender { get; set; }

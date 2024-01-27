@@ -1,4 +1,5 @@
-﻿using Infrastructure.CrossCuttingConcern.MailOp;
+﻿using Infrastructure.CrossCuttingConcern.Crypto;
+using Infrastructure.CrossCuttingConcern.MailOp;
 using Microsoft.AspNetCore.Mvc;
 using TechnicShop.Bussiness.Abstract;
 using TechnicShop.Bussiness.Concrete;
@@ -74,7 +75,9 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
                 return Json(new { result = false, Mesaj = "Validasyon Hatası Oldu." });
             }
 
-            Model.Entity.Admin admin = _adminBs.Get(x => x.Email == model.Email && x.Password == model.Password && x.IsDeleted == false, "AdminRoles", "AdminRoles.Role");
+            string password = CryptoManager.SHA1Encrypt(CryptoManager.MD5Encrypt(model.Password));
+
+            Model.Entity.Admin admin = _adminBs.Get(x => x.Email == model.Email && x.Password == password && x.IsDeleted == false, "AdminRoles", "AdminRoles.Role");
 
             if (admin != null)
             {
@@ -177,7 +180,7 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
             if (admin != null && model.Password == model.ConfirmPassword)
             {
                 admin.UniqueId = Guid.NewGuid(); //sql de newid() ile aynı quid id yi üretir.
-                admin.Password = model.Password;
+                admin.Password = CryptoManager.SHA1Encrypt(CryptoManager.MD5Encrypt(model.Password));
 
                 _adminBs.Update(admin);
 
