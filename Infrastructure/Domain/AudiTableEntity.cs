@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Infrastructure.Domain
 
 
 
-
+        //public Guid Id { get; set; } //PostgreSql de yeni ve genelde bu şekilde kullanılıyor.
         //public Nullable<int> CreatedBy { get; set; }
         //public Nullable<DateTime> CreatedDate { get; set; }
         //public Nullable<int> LastProcessUser { get; set; }

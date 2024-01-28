@@ -33,6 +33,8 @@ namespace TechnicShop.MVCUI
 
             builder.Services.AddSingleton<IAdminBs, AdminBs>();
             builder.Services.AddSingleton<IAdminRepository, EfAdminRepository>();
+            builder.Services.AddSingleton<ICategoryBs, CategoryBs>();
+            builder.Services.AddSingleton<ICategoryRepository, EfCatagoryRepository>();
 
             //Session
             builder.Services.AddSession(options =>

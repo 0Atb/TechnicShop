@@ -1,0 +1,119 @@
+﻿@model CategoryListViewModel
+@{
+    ViewData["Title"] = "Kategori";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Kategori Ekle</button>
+    <a style="margin-left:10px;" class="btn btn-warning h1">Kategori Ekle</a>
+</div>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Kategori Listesi</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Kategori Adi</th>
+                                <th>Kategori Görünümü</th>
+                                <th>Açıklama</th>
+                                <th>Sıra</th>
+                                <th>Aktiflik</th>
+                                <th>Düzenle</th>
+                                <th>Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Veriler -->
+                            @foreach (Category item in Model.CategoriesList)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.CategoryName</td>
+                                    <td>@item.CategoryInformation</td>
+                                    <td>@item.Explanation</td>
+                                    <td>@item.Sorting</td>
+                                    <td>@item.IsDeleted</td>
+                                    <td>
+                                        <a class="btn btn-success">Düzenle</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger">Sil</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yeni Kategori</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="frmKategoriEkle" asp-antiforgery="true">
+                    <div class="form-group">
+                        <label class="col-form-label">Kategori Adı</label>
+                        <input asp-for="CategoryName" type="text" class="form-control" placeholder="Kategori Adı">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Üst Kategori Adı</label>
+                        <select asp-for="MainCategoryId" class="form-control" asp-items="Model.CategorySelectList"></select>
+                    </div>
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                        <label asp-for="IsDeleted"  class="form-check-label">Aktiflik</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Sıra</label>
+                        <input asp-for="Sorting" type="text" class="form-control" placeholder="Sıra">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Açıklama:</label>
+                        <textarea asp-for="Explanation" class="form-control" placeholder="Açıklama"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button id="btnKategoriEkle" type="button" class="btn btn-primary">Kategori Ekle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section script{
+
+
+
+
+}

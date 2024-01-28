@@ -56,5 +56,14 @@ namespace TechnicShop.MVCUI.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        public IActionResult Contact()
+        {
+
+
+
+            return View();
+        }
+
     }
 }
